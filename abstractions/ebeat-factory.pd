@@ -1,4 +1,4 @@
-#N canvas 558 22 1320 793 10;
+#N canvas 80 365 1266 553 10;
 #X obj 104 76 spine 8;
 #X obj -35 466 ctlin;
 #X floatatom -12 508 5 0 0 0 - - -, f 5;
@@ -20,7 +20,6 @@
 #X obj 788 -44 expr (($f1/127) - .5)*2 + 1;
 #X obj 788 -66 inlet;
 #X obj 143 35 r spine-rot-\$1-\$0;
-#X obj 123 15 r spine-\$1-\$0;
 #X text -77 441 modulate spine with pitch bend and others with ctl
 in;
 #X obj 304 -46 r spinecenter-\$1-\$0;
@@ -56,19 +55,19 @@ in;
 -1 -1;
 #X obj 101 101 cnv 15 464 84 empty empty ebeat_\$1 300 5 0 14 -128992
 -66577 0;
-#X floatatom 145 124 5 0 0 0 - spinecenter-#1-#0 -, f 5;
+#X floatatom 145 124 5 0 0 0 - spinecenter-#1 -, f 5;
 #X obj 371 166 r len-\$1-\$0;
 #X obj 448 166 r rot-\$1-\$0;
-#X obj 148 106 hsl 128 15 0 16 0 0 spinecenter-\$1-\$0 empty empty
--2 -8 0 10 -262144 -1 -1 0 1;
-#X floatatom 144 158 5 0 0 0 - spine-rot-#1-#0 -, f 5;
+#X obj 148 106 hsl 128 15 0 16 0 0 spinecenter-\$1 empty empty -2 -8
+0 10 -262144 -1 -1 10000 1;
+#X floatatom 144 158 5 0 0 0 - spine-rot-#1 -, f 5;
 #X obj 281 165 r nbeats-\$1-\$0;
-#X obj 147 141 hsl 128 15 0 127 0 0 spine-rot-\$1-\$0 empty empty -2
--8 0 10 -262144 -1 -1 0 1;
+#X obj 147 141 hsl 128 15 0 127 0 0 spine-rot-\$1 empty empty -2 -8
+0 10 -262144 -1 -1 4800 1;
 #X text 107 107 Spine;
 #X text 108 139 Rota;
 #X obj 284 124 hradio 32 1 0 8 preset-\$1-\$0 empty empty 0 -8 0 10
--262144 -1 -1 5;
+-262144 -1 -1 0;
 #X obj 101 286 cnv 15 464 64 empty empty empty 20 12 0 14 -128992 -66577
 0;
 #X floatatom 373 295 5 0 0 0 - n8-#1-#0 -, f 5;
@@ -99,254 +98,14 @@ in;
 #X floatatom 566 103 5 0 0 0 - - -, f 5;
 #X obj 686 159 s spine-\$1-\$0;
 #X obj 237 -68 inlet;
-#X obj 386 355 t b a;
-#X obj 346 405 list;
-#X obj 346 381 list;
-#X obj 345 355 t b a;
-#X obj -92 102 array define ebeat-preset-\$1-0;
-#X obj -92 121 array define ebeat-preset-\$1-1;
-#X obj -92 140 array define ebeat-preset-\$1-2;
-#X obj -92 159 array define ebeat-preset-\$1-3;
-#X obj -93 180 array define ebeat-preset-\$1-4;
-#X obj -93 199 array define ebeat-preset-\$1-5;
-#X obj -93 218 array define ebeat-preset-\$1-6;
-#X obj -93 237 array define ebeat-preset-\$1-7;
 #X obj 338 160 bng 15 250 50 0 preset-save-\$1-\$0 empty Save 17 7
 0 10 -262144 -1 -1;
-#X obj -92 -10 array define ebeat-factory-\$1;
-#X text -149 78 each of the 8 presets has its own array;
-#X obj 9 577 openpanel;
-#X msg 8 557 symbol ./;
-#X obj 254 54 r spinecenter-\$1-\$0;
-#X obj 376 54 r spine-rot-\$1-\$0;
 #X obj 242 76 prepend set;
 #X obj 328 76 prepend set;
 #X obj 498 54 r eucl3-1-\$1-\$0;
 #X obj 595 54 r eucl3-2-\$1-\$0;
-#X obj 346 428 s eucl3-up-down-\$1-\$0;
-#X text -82 534 future versions could accomodate save as and open;
 #X obj 385 161 bng 15 250 50 0 preset-load-\$1-\$0 empty Load 17 7
 0 10 -262144 -1 -1;
-#N canvas 24 121 848 593 preset-save-load 1;
-#X obj -6857 315 list trim;
-#X obj -6856 115 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj -6857 134 symbol ebeat-preset-\$1;
-#X msg -6857 182 \$1-\$2;
-#X obj -6858 224 list append;
-#X obj -6857 342 t b a;
-#X obj -6857 160 pack s 0;
-#X obj -7083 23 r preset-\$1-\$0;
-#X text -6733 265 upon changing preset \, the current preset will be
-written to the appropriate array... then the next preset will be loaded
-from its array;
-#X obj -7106 282 array get;
-#X obj -7034 198 prepend set;
-#X msg -7073 230 ebeat-preset-mvox-0;
-#X obj -7074 255 prepend symbol;
-#X obj -7104 196 t b b;
-#X obj -6857 248 list append;
-#X obj -6658 215 pack;
-#X obj -6658 174 f;
-#X obj -6629 174 t b a;
-#X obj -6655 92 r spinecenter-\$1-\$0;
-#X obj -6533 92 r spine-rot-\$1-\$0;
-#X obj -7189 353 s eucl3-1-\$1-\$0;
-#X obj -7081 354 s eucl3-2-\$1-\$0;
-#X obj -7137 410 unpack;
-#X obj -7138 432 s spinecenter-\$1-\$0;
-#X obj -7016 432 s spine-rot-\$1-\$0;
-#X obj -6795 175 r eucl3-up-down-\$1-\$0;
-#X obj -7111 162 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj -7139 483 prepend set;
-#X msg -7139 506 0 0 0 0 0 0 0 0 0;
-#X obj -6818 399 t b b;
-#X obj -6727 419 prepend add;
-#X msg -6780 453 set;
-#X msg -6818 476 addsemi;
-#X obj -7133 305 list split 9;
-#X obj -7080 328 list split 9;
-#X obj -7026 478 prepend set;
-#X msg -7026 501 0 0 0 0 0 0 0 0 0;
-#X msg -6724 456 \;;
-#X obj -6795 196 prepend 0;
-#X obj -7078 86 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj -7079 105 symbol ebeat-preset-\$1;
-#X msg -7079 153 \$1-\$2;
-#X obj -7079 131 pack s 0;
-#X obj -7084 55 t b b f;
-#X obj -6818 422 t b b;
-#X obj -7134 127 del 50;
-#X obj -7057 541 prepend set;
-#X msg -7057 564 0 0;
-#X obj -7045 384 list split 2;
-#X floatatom -7013 81 5 0 0 0 - - -, f 5;
-#X floatatom -6764 109 5 0 0 0 - - -, f 5;
-#X obj -6856 65 r preset-store-\$1-\$0;
-#X obj -6825 101 t b f;
-#X obj -6798 82 r preset-\$1-\$0;
-#X obj -6856 90 f 0;
-#X connect 0 0 5 0;
-#X connect 1 0 2 0;
-#X connect 2 0 6 0;
-#X connect 3 0 4 0;
-#X connect 4 0 14 0;
-#X connect 5 0 29 0;
-#X connect 5 1 30 0;
-#X connect 6 0 3 0;
-#X connect 7 0 43 0;
-#X connect 9 0 33 0;
-#X connect 10 0 11 0;
-#X connect 11 0 12 0;
-#X connect 12 0 9 2;
-#X connect 13 0 9 0;
-#X connect 13 1 11 0;
-#X connect 14 0 0 0;
-#X connect 15 0 14 1;
-#X connect 16 0 15 0;
-#X connect 17 0 16 0;
-#X connect 17 1 15 1;
-#X connect 18 0 16 0;
-#X connect 19 0 17 0;
-#X connect 22 0 23 0;
-#X connect 22 1 24 0;
-#X connect 25 0 38 0;
-#X connect 26 0 13 0;
-#X connect 27 0 28 0;
-#X connect 29 0 44 0;
-#X connect 29 1 37 0;
-#X connect 30 0 37 0;
-#X connect 31 0 37 0;
-#X connect 32 0 37 0;
-#X connect 33 0 20 0;
-#X connect 33 0 27 0;
-#X connect 33 1 34 0;
-#X connect 34 0 21 0;
-#X connect 34 0 35 0;
-#X connect 34 1 48 0;
-#X connect 35 0 36 0;
-#X connect 38 0 4 1;
-#X connect 39 0 40 0;
-#X connect 40 0 42 0;
-#X connect 41 0 10 0;
-#X connect 42 0 41 0;
-#X connect 43 0 45 0;
-#X connect 43 1 39 0;
-#X connect 43 2 42 1;
-#X connect 43 2 49 0;
-#X connect 44 0 32 0;
-#X connect 44 1 31 0;
-#X connect 45 0 26 0;
-#X connect 46 0 47 0;
-#X connect 48 0 22 0;
-#X connect 48 0 46 0;
-#X connect 51 0 54 0;
-#X connect 52 0 1 0;
-#X connect 52 1 6 1;
-#X connect 53 0 54 1;
-#X connect 54 0 52 0;
-#X restore -94 272 pd preset-save-load;
-#N canvas 428 253 937 634 patcher-state-save-load 1;
-#X obj 264 364 array get;
-#X obj 264 134 until;
-#X obj 264 111 8;
-#X obj 264 163 t b f;
-#X obj 309 229 symbol ebeat-preset-\$1;
-#X msg 309 277 \$1-\$2;
-#X obj 309 255 pack s 0;
-#X obj 264 417 array set ebeat-factory-\$1;
-#X obj 328 365 array size;
-#X obj 307 302 t a b a;
-#X obj 326 388 *;
-#X obj 309 205 t b f f;
-#X obj 187 60 r preset-save-\$1-\$0;
-#X obj 187 82 t b b;
-#X obj 187 115 del 1000;
-#X obj 355 339 prepend symbol;
-#X obj 266 339 prepend symbol;
-#X obj 186 448 symbol ebeat-factory-\$1;
-#X obj -37 114 symbol ebeat-factory-\$1;
-#X obj -76 61 r preset-load-\$1-\$0;
-#X msg 186 474 \; \$1 write ../data/state_data/\$1.txt;
-#X msg -37 140 \; \$1 read ../data/state_data/\$1.txt;
-#X text 329 137 collect patcher-state-data save it as a text file;
-#X text -94 22 read state data from a text file \, recall current preset
-;
-#X obj -132 62 loadbang;
-#X obj -223 235 del 500;
-#X obj -223 258 0;
-#X obj -223 281 s preset-\$1-\$0;
-#X obj -76 89 t b b b;
-#X obj 264 134 until;
-#X obj 264 111 8;
-#X obj 264 163 t b f;
-#X text 329 137 collect patcher-state-data save it as a text file;
-#X obj -92 176 until;
-#X obj -85 151 8;
-#X obj -154 485 array set ebeat-preset-\$1-0;
-#X obj 51 383 prepend symbol;
-#X obj 22 288 symbol ebeat-preset-\$1;
-#X msg 22 336 \$1-\$2;
-#X obj 22 314 pack s 0;
-#X obj -67 230 t b f f;
-#X obj -154 460 array get ebeat-factory-\$1;
-#X obj -82 415 array size;
-#X obj -82 438 *;
-#X obj -93 203 t b f;
-#X obj 22 358 t b a;
-#X connect 0 0 7 0;
-#X connect 1 0 3 0;
-#X connect 2 0 1 0;
-#X connect 3 0 0 0;
-#X connect 3 1 11 0;
-#X connect 4 0 6 0;
-#X connect 5 0 9 0;
-#X connect 6 0 5 0;
-#X connect 8 0 10 0;
-#X connect 9 0 16 0;
-#X connect 9 1 8 0;
-#X connect 9 2 15 0;
-#X connect 10 0 7 1;
-#X connect 11 0 4 0;
-#X connect 11 1 6 1;
-#X connect 11 2 10 1;
-#X connect 12 0 13 0;
-#X connect 13 0 14 0;
-#X connect 13 1 2 0;
-#X connect 14 0 17 0;
-#X connect 15 0 8 1;
-#X connect 16 0 0 2;
-#X connect 17 0 20 0;
-#X connect 18 0 21 0;
-#X connect 19 0 28 0;
-#X connect 24 0 28 0;
-#X connect 25 0 26 0;
-#X connect 26 0 27 0;
-#X connect 28 0 25 0;
-#X connect 28 1 34 0;
-#X connect 28 2 18 0;
-#X connect 29 0 31 0;
-#X connect 30 0 29 0;
-#X connect 33 0 44 0;
-#X connect 34 0 33 0;
-#X connect 36 0 35 2;
-#X connect 36 0 42 1;
-#X connect 37 0 39 0;
-#X connect 38 0 45 0;
-#X connect 39 0 38 0;
-#X connect 40 0 37 0;
-#X connect 40 1 39 1;
-#X connect 40 2 43 1;
-#X connect 41 0 35 0;
-#X connect 42 0 43 0;
-#X connect 43 0 41 1;
-#X connect 44 0 41 0;
-#X connect 44 1 40 0;
-#X connect 45 0 42 0;
-#X connect 45 1 36 0;
-#X restore -94 295 pd patcher-state-save-load;
 #X obj 699 55 r current_preset-\$1-\$0;
 #X obj 567 121 automator spine-\$1;
 #X obj 566 296 automator rot-\$1;
@@ -354,51 +113,208 @@ from its array;
 #X obj 565 179 automator nbeats-\$1;
 #X msg 848 50 2 3 4 2 3 4 2 3 4;
 #X msg 339 -77 1;
-#X obj 449 524 prepend set;
-#X msg 449 546 0 0 0 0 0 0 0 0 0;
 #X obj 285 160 bng 15 250 50 0 preset-store-\$1-\$0 empty Store 17
 7 0 10 -262144 -1 -1;
-#X obj 151 193 eucl3 dwn-\$1;
-#X obj 355 193 eucl3 up-\$1;
-#X connect 0 0 28 0;
-#X connect 0 1 29 0;
-#X connect 0 2 107 0;
-#X connect 0 2 108 0;
+#X obj -91 89 r preset-\$1-\$0;
+#X obj -91 111 preset_rw \$1;
+#N canvas 262 22 620 398 param_list 1;
+#X msg 98 208 spinecenter-\\\$1 48 \, spine-rot-\\\$1 48 \, nbeats1-up-\\\\\\\$1
+19 \, len1-up-\\\\\\\$1 17 \, rot1-up-\\\\\\\$1 8 \, len2-up-\\\\\\\$1
+4 \, rot2-up-\\\\\\\$1 17 \, nbeats3-up-\\\\\\\$1 15 \, len3-up-\\\\\\\$1
+30 \, rot3-up-\\\\\\\$1 1 \, nbeats2-up-\\\\\\\$1 1 \, len1-dwn-\\\\\\\$1
+1 \, len2-dwn-\\\\\\\$1 1 \, len3-dwn-\\\\\\\$1 1 \, nbeats1-dwn-\\\\\\\$1
+1 \, nbeats2-dwn-\\\\\\\$1 2 \, nbeats3-dwn-\\\\\\\$1 2 \, rot1-dwn-\\\\\\\$1
+1 \, rot2-dwn-\\\\\\\$1 1 \, rot3-dwn-\\\\\\\$1 1 \, spinecenter-\\\$1
+14.3622 \, spine-rot-\\\$1 33 \, nbeats1-up-\\\\\\\$1 19 \, len1-up-\\\\\\\$1
+17 \, rot1-up-\\\\\\\$1 8 \, len2-up-\\\\\\\$1 4 \, rot2-up-\\\\\\\$1
+17 \, nbeats3-up-\\\\\\\$1 15 \, len3-up-\\\\\\\$1 30 \, rot3-up-\\\\\\\$1
+1 \, nbeats2-up-\\\\\\\$1 1 \, len1-dwn-\\\\\\\$1 1 \, len2-dwn-\\\\\\\$1
+1 \, len3-dwn-\\\\\\\$1 1 \, nbeats1-dwn-\\\\\\\$1 1 \, nbeats2-dwn-\\\\\\\$1
+2 \, nbeats3-dwn-\\\\\\\$1 2 \, rot1-dwn-\\\\\\\$1 1 \, rot2-dwn-\\\\\\\$1
+1 \, rot3-dwn-\\\\\\\$1 1 \, spinecenter-\\\$1 48 \, spine-rot-\\\$1
+48 \, nbeats1-up-\\\\\\\$1 19 \, len1-up-\\\\\\\$1 17 \, rot1-up-\\\\\\\$1
+8 \, len2-up-\\\\\\\$1 4 \, rot2-up-\\\\\\\$1 17 \, nbeats3-up-\\\\\\\$1
+15 \, len3-up-\\\\\\\$1 30 \, rot3-up-\\\\\\\$1 1 \, nbeats2-up-\\\\\\\$1
+1 \, len1-dwn-\\\\\\\$1 1 \, len2-dwn-\\\\\\\$1 1 \, len3-dwn-\\\\\\\$1
+1 \, nbeats1-dwn-\\\\\\\$1 1 \, nbeats2-dwn-\\\\\\\$1 2 \, nbeats3-dwn-\\\\\\\$1
+2 \, rot1-dwn-\\\\\\\$1 1 \, rot2-dwn-\\\\\\\$1 1 \, rot3-dwn-\\\\\\\$1
+1 \, spinecenter-\\\$1 13.7323 \, spine-rot-\\\$1 16 \, nbeats1-up-\\\\\\\$1
+16 \, len1-up-\\\\\\\$1 26 \, rot1-up-\\\\\\\$1 26 \, len2-up-\\\\\\\$1
+13 \, rot2-up-\\\\\\\$1 7 \, nbeats3-up-\\\\\\\$1 23 \, len3-up-\\\\\\\$1
+48 \, rot3-up-\\\\\\\$1 7 \, nbeats2-up-\\\\\\\$1 4 \, len1-dwn-\\\\\\\$1
+13 \, len2-dwn-\\\\\\\$1 11 \, len3-dwn-\\\\\\\$1 11 \, nbeats1-dwn-\\\\\\\$1
+15 \, nbeats2-dwn-\\\\\\\$1 6 \, nbeats3-dwn-\\\\\\\$1 11 \, rot1-dwn-\\\\\\\$1
+18 \, rot2-dwn-\\\\\\\$1 14 \, rot3-dwn-\\\\\\\$1 16 \, spinecenter-\\\$1
+48 \, spine-rot-\\\$1 48 \, nbeats1-up-\\\\\\\$1 19 \, len1-up-\\\\\\\$1
+17 \, rot1-up-\\\\\\\$1 8 \, len2-up-\\\\\\\$1 4 \, rot2-up-\\\\\\\$1
+17 \, nbeats3-up-\\\\\\\$1 15 \, len3-up-\\\\\\\$1 30 \, rot3-up-\\\\\\\$1
+1 \, nbeats2-up-\\\\\\\$1 1 \, len1-dwn-\\\\\\\$1 1 \, len2-dwn-\\\\\\\$1
+1 \, len3-dwn-\\\\\\\$1 1 \, nbeats1-dwn-\\\\\\\$1 1 \, nbeats2-dwn-\\\\\\\$1
+2 \, nbeats3-dwn-\\\\\\\$1 2 \, rot1-dwn-\\\\\\\$1 1 \, rot2-dwn-\\\\\\\$1
+1 \, rot3-dwn-\\\\\\\$1 1 \, spinecenter-\\\$1 13.7323 \, spine-rot-\\\$1
+16 \, nbeats1-up-\\\\\\\$1 16 \, len1-up-\\\\\\\$1 26 \, rot1-up-\\\\\\\$1
+26 \, len2-up-\\\\\\\$1 13 \, rot2-up-\\\\\\\$1 7 \, nbeats3-up-\\\\\\\$1
+23 \, len3-up-\\\\\\\$1 48 \, rot3-up-\\\\\\\$1 7 \, nbeats2-up-\\\\\\\$1
+4 \, len1-dwn-\\\\\\\$1 13 \, len2-dwn-\\\\\\\$1 11 \, len3-dwn-\\\\\\\$1
+11 \, nbeats1-dwn-\\\\\\\$1 15 \, nbeats2-dwn-\\\\\\\$1 6 \, nbeats3-dwn-\\\\\\\$1
+11 \, rot1-dwn-\\\\\\\$1 18 \, rot2-dwn-\\\\\\\$1 14 \, rot3-dwn-\\\\\\\$1
+16 \, spinecenter-\\\$1 48 \, spine-rot-\\\$1 48 \, nbeats1-up-\\\\\\\$1
+19 \, len1-up-\\\\\\\$1 17 \, rot1-up-\\\\\\\$1 8 \, len2-up-\\\\\\\$1
+4 \, rot2-up-\\\\\\\$1 17 \, nbeats3-up-\\\\\\\$1 15 \, len3-up-\\\\\\\$1
+30 \, rot3-up-\\\\\\\$1 1 \, nbeats2-up-\\\\\\\$1 1 \, len1-dwn-\\\\\\\$1
+1 \, len2-dwn-\\\\\\\$1 1 \, len3-dwn-\\\\\\\$1 1 \, nbeats1-dwn-\\\\\\\$1
+1 \, nbeats2-dwn-\\\\\\\$1 2 \, nbeats3-dwn-\\\\\\\$1 2 \, rot1-dwn-\\\\\\\$1
+1 \, rot2-dwn-\\\\\\\$1 1 \, rot3-dwn-\\\\\\\$1 1 \, spinecenter-\\\$1
+12.5984 \, spine-rot-\\\$1 48 \, nbeats1-up-\\\\\\\$1 19 \, len1-up-\\\\\\\$1
+17 \, rot1-up-\\\\\\\$1 8 \, len2-up-\\\\\\\$1 4 \, rot2-up-\\\\\\\$1
+17 \, nbeats3-up-\\\\\\\$1 15 \, len3-up-\\\\\\\$1 30 \, rot3-up-\\\\\\\$1
+1 \, nbeats2-up-\\\\\\\$1 1 \, len1-dwn-\\\\\\\$1 1 \, len2-dwn-\\\\\\\$1
+1 \, len3-dwn-\\\\\\\$1 1 \, nbeats1-dwn-\\\\\\\$1 1 \, nbeats2-dwn-\\\\\\\$1
+2 \, nbeats3-dwn-\\\\\\\$1 2 \, rot1-dwn-\\\\\\\$1 1 \, rot2-dwn-\\\\\\\$1
+1 \, rot3-dwn-\\\\\\\$1 1 \, spinecenter-\\\$1 12.5984 \, spine-rot-\\\$1
+48 \, nbeats1-up-\\\\\\\$1 19 \, len1-up-\\\\\\\$1 17 \, rot1-up-\\\\\\\$1
+8 \, len2-up-\\\\\\\$1 4 \, rot2-up-\\\\\\\$1 17 \, nbeats3-up-\\\\\\\$1
+15 \, len3-up-\\\\\\\$1 30 \, rot3-up-\\\\\\\$1 1 \, nbeats2-up-\\\\\\\$1
+1 \, len1-dwn-\\\\\\\$1 1 \, len2-dwn-\\\\\\\$1 1 \, len3-dwn-\\\\\\\$1
+1 \, nbeats1-dwn-\\\\\\\$1 1 \, nbeats2-dwn-\\\\\\\$1 2 \, nbeats3-dwn-\\\\\\\$1
+2 \, rot1-dwn-\\\\\\\$1 1 \, rot2-dwn-\\\\\\\$1 1 \, rot3-dwn-\\\\\\\$1
+1 \, spinecenter-\\\$1 48 \, spine-rot-\\\$1 48 \, nbeats1-up-\\\\\\\$1
+19 \, len1-up-\\\\\\\$1 17 \, rot1-up-\\\\\\\$1 8 \, len2-up-\\\\\\\$1
+4 \, rot2-up-\\\\\\\$1 17 \, nbeats3-up-\\\\\\\$1 15 \, len3-up-\\\\\\\$1
+30 \, rot3-up-\\\\\\\$1 1 \, nbeats2-up-\\\\\\\$1 1 \, len1-dwn-\\\\\\\$1
+1 \, len2-dwn-\\\\\\\$1 1 \, len3-dwn-\\\\\\\$1 1 \, nbeats1-dwn-\\\\\\\$1
+1 \, nbeats2-dwn-\\\\\\\$1 2 \, nbeats3-dwn-\\\\\\\$1 2 \, rot1-dwn-\\\\\\\$1
+1 \, rot2-dwn-\\\\\\\$1 1 \, rot3-dwn-\\\\\\\$1 1 \, spinecenter-\\\$1
+13.7323 \, spine-rot-\\\$1 16 \, nbeats1-up-\\\\\\\$1 16 \, len1-up-\\\\\\\$1
+26 \, rot1-up-\\\\\\\$1 26 \, len2-up-\\\\\\\$1 13 \, rot2-up-\\\\\\\$1
+7 \, nbeats3-up-\\\\\\\$1 23 \, len3-up-\\\\\\\$1 48 \, rot3-up-\\\\\\\$1
+7 \, nbeats2-up-\\\\\\\$1 4 \, len1-dwn-\\\\\\\$1 13 \, len2-dwn-\\\\\\\$1
+11 \, len3-dwn-\\\\\\\$1 11 \, nbeats1-dwn-\\\\\\\$1 15 \, nbeats2-dwn-\\\\\\\$1
+6 \, nbeats3-dwn-\\\\\\\$1 11 \, rot1-dwn-\\\\\\\$1 18 \, rot2-dwn-\\\\\\\$1
+14 \, rot3-dwn-\\\\\\\$1 16 \, spinecenter-\\\$1 10.3307 \, spine-rot-\\\$1
+9 \, nbeats1-up-\\\\\\\$1 9 \, len1-up-\\\\\\\$1 9 \, rot1-up-\\\\\\\$1
+9 \, len2-up-\\\\\\\$1 9 \, rot2-up-\\\\\\\$1 9 \, nbeats3-up-\\\\\\\$1
+9 \, len3-up-\\\\\\\$1 9 \, rot3-up-\\\\\\\$1 9 \, nbeats2-up-\\\\\\\$1
+9 \, len1-dwn-\\\\\\\$1 9 \, len2-dwn-\\\\\\\$1 9 \, len3-dwn-\\\\\\\$1
+9 \, nbeats1-dwn-\\\\\\\$1 9 \, nbeats2-dwn-\\\\\\\$1 9 \, nbeats3-dwn-\\\\\\\$1
+9 \, rot1-dwn-\\\\\\\$1 9 \, rot2-dwn-\\\\\\\$1 9 \, rot3-dwn-\\\\\\\$1
+9 \, spinecenter-\\\$1 9 \, spine-rot-\\\$1 9 \, nbeats1-up-\\\\\\\$1
+9 \, len1-up-\\\\\\\$1 9 \, rot1-up-\\\\\\\$1 9 \, len2-up-\\\\\\\$1
+9 \, rot2-up-\\\\\\\$1 9 \, nbeats3-up-\\\\\\\$1 9 \, len3-up-\\\\\\\$1
+9 \, rot3-up-\\\\\\\$1 9 \, nbeats2-up-\\\\\\\$1 9 \, len1-dwn-\\\\\\\$1
+9 \, len2-dwn-\\\\\\\$1 9 \, len3-dwn-\\\\\\\$1 9 \, nbeats1-dwn-\\\\\\\$1
+9 \, nbeats2-dwn-\\\\\\\$1 9 \, nbeats3-dwn-\\\\\\\$1 9 \, rot1-dwn-\\\\\\\$1
+9 \, rot2-dwn-\\\\\\\$1 9 \, rot3-dwn-\\\\\\\$1 9 \, spinecenter-\\\$1
+13.7323 \, spine-rot-\\\$1 16 \, nbeats1-up-\\\\\\\$1 16 \, len1-up-\\\\\\\$1
+26 \, rot1-up-\\\\\\\$1 26 \, len2-up-\\\\\\\$1 13 \, rot2-up-\\\\\\\$1
+7 \, nbeats3-up-\\\\\\\$1 23 \, len3-up-\\\\\\\$1 48 \, rot3-up-\\\\\\\$1
+7 \, nbeats2-up-\\\\\\\$1 4 \, len1-dwn-\\\\\\\$1 13 \, len2-dwn-\\\\\\\$1
+11 \, len3-dwn-\\\\\\\$1 11 \, nbeats1-dwn-\\\\\\\$1 15 \, nbeats2-dwn-\\\\\\\$1
+6 \, nbeats3-dwn-\\\\\\\$1 11 \, rot1-dwn-\\\\\\\$1 18 \, rot2-dwn-\\\\\\\$1
+14 \, rot3-dwn-\\\\\\\$1 16 \, spinecenter-\\\$1 14.3622 \, spine-rot-\\\$1
+33 \, nbeats1-up-\\\\\\\$1 19 \, len1-up-\\\\\\\$1 17 \, rot1-up-\\\\\\\$1
+8 \, len2-up-\\\\\\\$1 4 \, rot2-up-\\\\\\\$1 17 \, nbeats3-up-\\\\\\\$1
+15 \, len3-up-\\\\\\\$1 30 \, rot3-up-\\\\\\\$1 1 \, nbeats2-up-\\\\\\\$1
+1 \, len1-dwn-\\\\\\\$1 1 \, len2-dwn-\\\\\\\$1 1 \, len3-dwn-\\\\\\\$1
+1 \, nbeats1-dwn-\\\\\\\$1 1 \, nbeats2-dwn-\\\\\\\$1 2 \, nbeats3-dwn-\\\\\\\$1
+2 \, rot1-dwn-\\\\\\\$1 1 \, rot2-dwn-\\\\\\\$1 1 \, rot3-dwn-\\\\\\\$1
+1 \, spinecenter-\\\$1 12.5984 \, spine-rot-\\\$1 48 \, nbeats1-up-\\\\\\\$1
+19 \, len1-up-\\\\\\\$1 17 \, rot1-up-\\\\\\\$1 8 \, len2-up-\\\\\\\$1
+4 \, rot2-up-\\\\\\\$1 17 \, nbeats3-up-\\\\\\\$1 15 \, len3-up-\\\\\\\$1
+30 \, rot3-up-\\\\\\\$1 1 \, nbeats2-up-\\\\\\\$1 1 \, len1-dwn-\\\\\\\$1
+1 \, len2-dwn-\\\\\\\$1 1 \, len3-dwn-\\\\\\\$1 1 \, nbeats1-dwn-\\\\\\\$1
+1 \, nbeats2-dwn-\\\\\\\$1 2 \, nbeats3-dwn-\\\\\\\$1 2 \, rot1-dwn-\\\\\\\$1
+1 \, rot2-dwn-\\\\\\\$1 1 \, rot3-dwn-\\\\\\\$1 1 \,;
+#X msg 203 97 addcomma;
+#X obj 8 13 r preset-store-\$1-\$0;
+#X obj 8 35 t b b;
+#X msg 7 59 set;
+#X obj 99 273 outlet;
+#X obj 203 72 t b a;
+#X obj 203 40 inlet;
+#X text 190 -3 there is probably a soln for this with text object that's
+more elegant;
+#X obj 116 158 prepend add2;
+#X connect 0 0 5 0;
+#X connect 1 0 0 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 3 1 0 0;
+#X connect 4 0 0 0;
+#X connect 6 0 1 0;
+#X connect 6 1 9 0;
+#X connect 7 0 6 0;
+#X connect 9 0 0 0;
+#X restore -56 65 pd param_list;
+#N canvas 103 22 450 300 rwso 0;
+#X obj 9 52 r preset-save-\$1-\$0;
+#X msg 9 80 w;
+#X obj 37 71 r preset-load-\$1-\$0;
+#X msg 37 91 r;
+#X obj 131 52 r preset-save_as-\$1-\$0;
+#X msg 70 99 s;
+#X msg 103 112 o;
+#X obj 158 71 r preset-open-\$1-\$0;
+#X obj 28 168 outlet;
+#X connect 0 0 1 0;
+#X connect 1 0 8 0;
+#X connect 2 0 3 0;
+#X connect 3 0 8 0;
+#X connect 4 0 5 0;
+#X connect 5 0 8 0;
+#X connect 6 0 8 0;
+#X connect 7 0 6 0;
+#X restore 0 89 pd rwso;
+#X obj 339 383 s \$0-params;
+#X obj 500 423 prepend set;
+#X msg 500 445 nbeats2-up-\\\\\\\$1 1;
+#X obj -33 30 r \$0-params;
+#X obj 354 194 eucl3 up-\$1;
+#X obj 150 193 eucl3 dwn-\$1;
+#X obj 123 15 r spine-\$1-\$0;
+#X obj 254 54 r spinecenter-\$1;
+#X obj 376 54 r spine-rot-\$1;
+#X obj -81 -41 param_get spine-rot-\$1;
+#X obj -57 -21 param_get spinecenter-\$1;
+#X connect 0 0 27 0;
+#X connect 0 1 28 0;
+#X connect 0 2 90 0;
+#X connect 0 2 91 0;
 #X connect 1 0 4 0;
 #X connect 1 1 2 0;
 #X connect 1 2 3 0;
 #X connect 5 0 6 0;
-#X connect 7 0 65 0;
-#X connect 8 0 66 0;
+#X connect 7 0 64 0;
+#X connect 8 0 65 0;
 #X connect 9 0 8 0;
 #X connect 9 1 8 1;
 #X connect 11 0 9 1;
 #X connect 12 0 0 0;
 #X connect 13 0 14 0;
 #X connect 15 0 7 0;
-#X connect 16 0 59 0;
+#X connect 16 0 58 0;
 #X connect 17 0 16 0;
-#X connect 18 0 64 0;
+#X connect 18 0 63 0;
 #X connect 19 0 18 0;
 #X connect 20 0 0 2;
-#X connect 21 0 0 1;
-#X connect 23 0 9 0;
-#X connect 24 0 25 0;
-#X connect 26 0 25 0;
+#X connect 22 0 9 0;
+#X connect 23 0 24 0;
+#X connect 25 0 24 0;
+#X connect 27 0 49 0;
 #X connect 28 0 50 0;
-#X connect 29 0 51 0;
-#X connect 32 0 107 2;
-#X connect 33 0 107 3;
-#X connect 36 0 107 1;
-#X connect 36 0 108 1;
-#X connect 42 0 57 1;
-#X connect 43 0 56 1;
-#X connect 44 0 55 1;
-#X connect 45 0 54 1;
-#X connect 46 0 53 1;
-#X connect 47 0 52 1;
-#X connect 48 0 51 1;
-#X connect 49 0 50 1;
+#X connect 31 0 91 2;
+#X connect 32 0 91 3;
+#X connect 35 0 90 1;
+#X connect 35 0 91 1;
+#X connect 41 0 56 1;
+#X connect 42 0 55 1;
+#X connect 43 0 54 1;
+#X connect 44 0 53 1;
+#X connect 45 0 52 1;
+#X connect 46 0 51 1;
+#X connect 47 0 50 1;
+#X connect 48 0 49 1;
+#X connect 49 0 10 0;
 #X connect 50 0 10 0;
 #X connect 51 0 10 0;
 #X connect 52 0 10 0;
@@ -406,44 +322,43 @@ from its array;
 #X connect 54 0 10 0;
 #X connect 55 0 10 0;
 #X connect 56 0 10 0;
-#X connect 57 0 10 0;
-#X connect 59 0 100 0;
-#X connect 60 0 98 1;
-#X connect 60 0 99 1;
-#X connect 60 0 100 1;
-#X connect 60 0 101 1;
-#X connect 64 0 99 0;
-#X connect 65 0 101 0;
-#X connect 66 0 98 0;
-#X connect 68 0 40 0;
-#X connect 69 0 71 0;
-#X connect 69 1 70 1;
-#X connect 70 0 92 0;
-#X connect 71 0 70 0;
-#X connect 72 0 71 0;
-#X connect 72 1 71 1;
-#X connect 85 0 84 0;
-#X connect 86 0 88 0;
-#X connect 87 0 89 0;
-#X connect 88 0 34 0;
-#X connect 89 0 37 0;
-#X connect 90 0 104 0;
-#X connect 90 0 107 4;
-#X connect 91 0 108 4;
-#X connect 97 0 40 0;
-#X connect 98 0 67 0;
-#X connect 99 0 63 0;
-#X connect 100 0 62 0;
-#X connect 101 0 61 0;
-#X connect 102 0 107 4;
-#X connect 103 0 9 1;
-#X connect 104 0 105 0;
-#X connect 107 0 52 0;
-#X connect 107 1 53 0;
-#X connect 107 2 54 0;
-#X connect 107 3 72 0;
-#X connect 108 0 55 0;
-#X connect 108 1 56 0;
-#X connect 108 2 57 0;
-#X connect 108 3 69 0;
+#X connect 58 0 77 0;
+#X connect 59 0 75 1;
+#X connect 59 0 76 1;
+#X connect 59 0 77 1;
+#X connect 59 0 78 1;
+#X connect 63 0 76 0;
+#X connect 64 0 78 0;
+#X connect 65 0 75 0;
+#X connect 67 0 39 0;
+#X connect 69 0 33 0;
+#X connect 70 0 36 0;
+#X connect 71 0 91 4;
+#X connect 72 0 90 4;
+#X connect 74 0 39 0;
+#X connect 75 0 66 0;
+#X connect 76 0 62 0;
+#X connect 77 0 61 0;
+#X connect 78 0 60 0;
+#X connect 79 0 91 4;
+#X connect 80 0 9 1;
+#X connect 82 0 83 0;
+#X connect 84 0 83 1;
+#X connect 85 0 83 2;
+#X connect 87 0 88 0;
+#X connect 89 0 84 0;
+#X connect 90 0 54 0;
+#X connect 90 1 55 0;
+#X connect 90 2 56 0;
+#X connect 90 3 86 0;
+#X connect 90 3 87 0;
+#X connect 91 0 51 0;
+#X connect 91 1 52 0;
+#X connect 91 2 53 0;
+#X connect 91 3 86 0;
+#X connect 92 0 0 1;
+#X connect 93 0 69 0;
+#X connect 94 0 70 0;
+#X connect 95 0 84 0;
+#X connect 96 0 84 0;
 #X coords 0 -1 1 1 684 250 1 100 100;
