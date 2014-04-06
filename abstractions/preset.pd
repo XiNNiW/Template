@@ -1,0 +1,18 @@
+#N canvas 0 22 1249 602 10;
+#X obj 208 25 r save;
+#X msg 208 47 w;
+#X obj 122 104 preset_rw \$1;
+#X obj 137 26 r \$1-param;
+#X obj 104 -19 inlet;
+#X obj 104 104 vradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144
+-1 -1 0;
+#X text 260 -84 preset save and recall;
+#X text 143 4 accepts parameters to named \$1 preset;
+#X text 255 27 global save;
+#X text 413 -82 interfaces with param object;
+#X connect 0 0 1 0;
+#X connect 1 0 2 2;
+#X connect 3 0 2 1;
+#X connect 4 0 5 0;
+#X connect 5 0 2 0;
+#X coords 0 -1 1 1 100 125 1 100 100;

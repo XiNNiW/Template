@@ -1,4 +1,4 @@
-#N canvas 599 57 450 300 10;
+#N canvas 28 118 450 300 10;
 #X obj 15 22 r \$1;
 #X obj 15 43 list prepend \$1;
 #X obj 15 65 list trim;
